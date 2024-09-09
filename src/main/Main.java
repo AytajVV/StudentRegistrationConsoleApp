@@ -7,6 +7,8 @@ package main;
 
 import beans.Student;
 import java.util.Scanner;
+import util.InputUtil;
+import util.StudentUtil;
 
 /**
  *
@@ -19,41 +21,26 @@ public class Main {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        
-        System.out.println("What do you want to do?"
-                + "\n1-Register student"
-                + "\n2-Show all students"
-                + "\n3-Find student"
-                + "\n4-Update student"
-                + "");
-        
-        Scanner sc = new Scanner(System.in);
-        int menu = sc.nextInt();
-        
-        
-        if (menu == 1) {
-            sc = new Scanner(System.in);
-            System.out.println("Enter name: ");
-            String name = sc.nextLine();
-            
-            sc = new Scanner(System.in);
-            System.out.println("Enter surname: ");
-            String surname = sc.nextLine();
-            
-            sc = new Scanner(System.in);
-            System.out.println("Enter age: ");
-            int age = sc.nextInt();
-            
-            sc = new Scanner(System.in);
-            System.out.println("Enter class name: ");
-            String className = sc.nextLine();
-            
-            
-            Student st = new Student(name, surname, age, className);
-            
+
+        int menu = 0;
+
+        while (true) {
+            menu = InputUtil.requireNumber("What do you want to do?"
+                    + "\n1-Register student"
+                    + "\n2-Show all students"
+                    + "\n3-Find student"
+                    + "\n4-Update student"
+                    + "");
+
+            if (menu == 1) {
+                StudentUtil.registerStudents();
+            } else if (menu == 2) {
+                StudentUtil.printAllRegisteredStudents();
+            } else if (menu == 3) {
+                StudentUtil.findStudentsAndPrint();
+            }
         }
         
-        
     }
-    
+
 }

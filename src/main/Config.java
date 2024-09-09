@@ -13,6 +13,6 @@ import beans.Student;
  */
 public class Config {
     
-    public static Student[] s = null;
+    public static Student[] students = null;
     
 }
