@@ -31,7 +31,7 @@ public class StudentUtil {
         }
         for (int i = 0; i < Config.students.length; i++) {
             Student st = Config.students[i];
-            System.out.println(st.getFullInfo());
+            System.out.println((i + 1) + ". " + st.getFullInfo());
         }
     }
 
@@ -53,10 +53,8 @@ public class StudentUtil {
             System.out.println(result[i].getFullInfo());
         }
     }
-    
-    
-    
-    public static Student[] findStudents(String text){
+
+    public static Student[] findStudents(String text) {
         int count = 0;
         for (int i = 0; i < Config.students.length; i++) {
             Student st = Config.students[i];
@@ -65,17 +63,81 @@ public class StudentUtil {
             }
 
         }
-        
+
         Student[] result = new Student[count];
         int found = 0;
         for (int i = 0; i < Config.students.length; i++) {
             Student st = Config.students[i];
             if (st.getName().contains(text) || st.getSurname().contains(text) || st.getClassName().contains(text)) {
-               result[found]=st;
-               found++;
+                result[found] = st;
+                found++;
             }
 
         }
         return result;
+    }
+
+    public static void updateStudentWithNewObject() {
+        StudentUtil.printAllRegisteredStudents();
+
+        int i = InputUtil.requireNumber("Nechenci telebede deyishiklik etmek isteyirsiniz? ");
+
+        System.out.println("Yeni melumatlari daxil edin: ");
+
+        Student s = StudentUtil.fillStudent();
+        Config.students[i - 1] = s;
+
+    }
+
+    public static void updateStudentWithSplit() {
+        StudentUtil.printAllRegisteredStudents();
+        int i = InputUtil.requireNumber("Nechenci telebede deyishiklik etmek isteyirsiniz? ");
+
+        System.out.println("Yeni melumatlari daxil edin: ");
+        //Student s = StudentUtil.fillStudent();
+        Student selectedStudent = Config.students[i - 1];
+        String changeParams = InputUtil.requireText("Neyi deyishmek isteyirsiz? meselen : name,surname,age,classname");
+
+        String[] parameters = changeParams.split(",");
+        for (int j = 0; j < parameters.length; j++) {
+            String param = parameters[i];
+            if (param.equalsIgnoreCase("name")) {
+                selectedStudent.setName(InputUtil.requireText("Name"));
+            }else if (param.equalsIgnoreCase("surname")) {
+                selectedStudent.setSurname(InputUtil.requireText("Surname"));
+            }else if (param.equalsIgnoreCase("age")) {
+                selectedStudent.setAge(InputUtil.requireNumber("Age"));
+            }else if (param.equalsIgnoreCase("classname")) {
+                selectedStudent.setClassName(InputUtil.requireText("Class name"));
+            }
+        }
+
+    }
+
+    public static void updateStudentWithSameObject() {
+        StudentUtil.printAllRegisteredStudents();
+        int i = InputUtil.requireNumber("Nechenci telebede deyishiklik etmek isteyirsiniz? ");
+
+        System.out.println("Yeni melumatlari daxil edin: ");
+        //Student s = StudentUtil.fillStudent();
+        Student selectedStudent = Config.students[i - 1];
+        String changeParams = InputUtil.requireText("Neyi deyishmek isteyirsiz? meselen : 'name', 'surname', 'age', 'classname' ");
+
+        if (changeParams.contains("'name'")) {
+            selectedStudent.setName(InputUtil.requireText("Name"));
+        }
+
+        if (changeParams.contains("'surname'")) {
+            selectedStudent.setSurname(InputUtil.requireText("Surname"));
+        }
+
+        if (changeParams.contains("'age'")) {
+            selectedStudent.setAge(InputUtil.requireNumber("Age"));
+        }
+
+        if (changeParams.contains("'classname'")) {
+            selectedStudent.setClassName(InputUtil.requireText("Class name"));
+        }
+
     }
 }

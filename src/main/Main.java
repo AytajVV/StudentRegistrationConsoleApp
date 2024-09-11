@@ -8,6 +8,7 @@ package main;
 import beans.Student;
 import java.util.Scanner;
 import util.InputUtil;
+import util.MenuUtil;
 import util.StudentUtil;
 
 /**
@@ -30,17 +31,12 @@ public class Main {
                     + "\n2-Show all students"
                     + "\n3-Find student"
                     + "\n4-Update student"
-                    + "");
+                    + "\n5-Exit");
 
-            if (menu == 1) {
-                StudentUtil.registerStudents();
-            } else if (menu == 2) {
-                StudentUtil.printAllRegisteredStudents();
-            } else if (menu == 3) {
-                StudentUtil.findStudentsAndPrint();
+            MenuUtil.processMenu(menu);
             }
         }
         
     }
 
-}
+
